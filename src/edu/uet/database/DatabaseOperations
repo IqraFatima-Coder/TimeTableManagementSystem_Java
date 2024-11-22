@@ -1,0 +1,37 @@
+package edu.uet.database;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class DatabaseOperations {
+    public void createRoom(Room room) {
+        String sql = "INSERT INTO rooms (name, capacity) VALUES (?, ?)";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, room.getName());
+            pstmt.setInt(2, room.getCapacity());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Room findRoom(int id) {
+        String sql = "SELECT * FROM rooms WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return new Room(rs.getInt("id"), rs.getString("name"), rs.getInt("capacity"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Implement other CRUD operations similarly
+}

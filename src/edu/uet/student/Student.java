@@ -4,14 +4,14 @@ import edu.uet.person.Person;
 
 public class Student extends Person{
 public static String csvFile="D:\\Students.csv";
-private int studentID;
+private String studentID;
 private String studentRollNo;
 private String studyProgram;
 private String studyYear;
-public int getStudentID() {
+public String getStudentID() {
 	return studentID;
 }
-public void setStudentID(int studentID) {
+public void setStudentID(String studentID) {
 	this.studentID = studentID;
 }
 public String getStudentRollNo() {
@@ -37,5 +37,9 @@ public String toString() {
 	str= this.studentID+","+this.studentRollNo+","+this.studyProgram+","+this.studyYear;
 	return str;
 	
+}
+public void setStudentEmail(String studentEmail) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'setStudentEmail'");
 }
 }
